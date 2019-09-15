@@ -1,23 +1,23 @@
 class NegociacaoController {
 
-    private data;
-    private quantidade;
-    private valor;
+    private data: HTMLInputElement;
+    private quantidade: HTMLInputElement;
+    private valor: HTMLInputElement;
 
     constructor() {
-        this.data = document.querySelector("#data");
-        this.quantidade = document.querySelector("#quantidade");
-        this.valor = document.querySelector("#valor");
+        this.data = <HTMLInputElement>document.querySelector("#data");
+        this.quantidade = <HTMLInputElement>document.querySelector("#quantidade");
+        this.valor = <HTMLInputElement>document.querySelector("#valor");
     }
 
-    adiciona(event) {
+    adiciona(event: Event) {
         
         event.preventDefault();
         
         const negociacao = new Negociacao(
-            this.data.value,
-            this.quantidade.value,
-            this.valor.value
+            this.data.valueAsDate,
+            parseInt(this.quantidade.value),
+            parseFloat(this.valor.value)
         )
 
         console.log(negociacao);
