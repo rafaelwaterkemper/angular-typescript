@@ -5,16 +5,12 @@ class NegociacaoController {
         this.data = document.querySelector("#data");
         this.quantidade = document.querySelector("#quantidade");
         this.valor = document.querySelector("#valor");
-        this.negociacaoView.update();
+        this.negociacaoView.update(this.negociacoes);
     }
     adiciona(event) {
         event.preventDefault();
         const negociacao = new Negociacao(this.data.valueAsDate, parseInt(this.quantidade.value), parseFloat(this.valor.value));
         this.negociacoes.adiciona(negociacao);
-        this.negociacoes.paraArray().forEach(negociacao => {
-            console.log(negociacao.data);
-            console.log(negociacao.quantidade);
-            console.log(negociacao.valor);
-        });
+        this.negociacaoView.update(this.negociacoes);
     }
 }
