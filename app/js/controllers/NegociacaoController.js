@@ -2,6 +2,7 @@ class NegociacaoController {
     constructor() {
         this.negociacoes = new Negociacoes();
         this.negociacaoView = new NegociacoesView("#negociacoesView");
+        this.mensagemView = new MensagemView("#mensagemView");
         this.data = document.querySelector("#data");
         this.quantidade = document.querySelector("#quantidade");
         this.valor = document.querySelector("#valor");
@@ -12,5 +13,6 @@ class NegociacaoController {
         const negociacao = new Negociacao(this.data.valueAsDate, parseInt(this.quantidade.value), parseFloat(this.valor.value));
         this.negociacoes.adiciona(negociacao);
         this.negociacaoView.update(this.negociacoes);
+        this.mensagemView.update('Negociação salva com sucesso');
     }
 }
