@@ -7,7 +7,7 @@ export class NegociacaoController {
     private quantidade: JQuery;
     private valor: JQuery;
     private negociacoes = new Negociacoes();
-    private negociacaoView = new NegociacoesView("#negociacoesView");
+    private negociacaoView = new NegociacoesView("#negociacoesView", true);
     private mensagemView = new MensagemView("#mensagemView");
 
     constructor() {

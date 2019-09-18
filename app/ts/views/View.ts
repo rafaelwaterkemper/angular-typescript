@@ -1,13 +1,23 @@
 export abstract class View<T> {
 
     private _element: JQuery;
+    private _escapar: boolean;
 
-    constructor(seletor: string) {
+
+    //? torna o parâmetro opcional. Parâmetros adicionais devem ser os últimos
+    //da lista de parâmetros
+    constructor(seletor: string, escapar?: boolean) {
         this._element = $(seletor);
+        this._escapar = escapar;
     }
 
     update(model: T): void {
-        this._element.html(this.template(model));
+        let template = this.template(model);
+        
+        if(this._escapar) 
+            template = template.replace(/<script>[\s\S]*?<\/script>/, '');
+        
+        this._element.html(template);
     }
 
     abstract template(model: T): string;
