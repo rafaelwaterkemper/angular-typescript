@@ -15,7 +15,7 @@ System.register(["../models/index", "../views/index"], function (exports_1, cont
             NegociacaoController = class NegociacaoController {
                 constructor() {
                     this.negociacoes = new index_1.Negociacoes();
-                    this.negociacaoView = new index_2.NegociacoesView("#negociacoesView");
+                    this.negociacaoView = new index_2.NegociacoesView("#negociacoesView", true);
                     this.mensagemView = new index_2.MensagemView("#mensagemView");
                     this.data = $("#data");
                     this.quantidade = $("#quantidade");
@@ -24,7 +24,11 @@ System.register(["../models/index", "../views/index"], function (exports_1, cont
                 }
                 adiciona(event) {
                     event.preventDefault();
-                    const negociacao = new index_1.Negociacao(new Date(this.data.val().replace(/-/g, ',')), parseInt(this.quantidade.val().toString()), parseFloat(this.valor.val().toString()));
+                    const negociacao = new index_1.Negociacao(new Date(this.data.val().replace(/-/g, ',')), parseInt(this.quantidade.val()), parseFloat(this.valor.val()));
+                    if (!negociacao.ehDiaUtil()) {
+                        this.mensagemView.update('Só podem ser adicionadas negociações em dias úteis.');
+                        return;
+                    }
                     this.negociacoes.adiciona(negociacao);
                     this.negociacaoView.update(this.negociacoes);
                     this.mensagemView.update('Negociação salva com sucesso');

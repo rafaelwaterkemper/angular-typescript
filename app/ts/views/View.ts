@@ -6,7 +6,7 @@ export abstract class View<T> {
 
     //? torna o parâmetro opcional. Parâmetros adicionais devem ser os últimos
     //da lista de parâmetros
-    constructor(seletor: string, escapar?: boolean) {
+    constructor(seletor: string, escapar: boolean = false) {
         this._element = $(seletor);
         this._escapar = escapar;
     }
