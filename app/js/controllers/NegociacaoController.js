@@ -29,7 +29,6 @@ System.register(["../models/index", "../views/index", "../helpers/index"], funct
                     this.negociacaoView.update(this.negociacoes);
                 }
                 adiciona(event) {
-                    event.preventDefault();
                     const negociacao = new index_1.Negociacao(new Date(this.data.val().replace(/-/g, ',')), parseInt(this.quantidade.val()), parseFloat(this.valor.val()));
                     if (!negociacao.ehDiaUtil()) {
                         this.mensagemView.update('Só podem ser adicionadas negociações em dias úteis.');
@@ -69,6 +68,12 @@ System.register(["../models/index", "../views/index", "../helpers/index"], funct
             __decorate([
                 index_3.domInject("#valor")
             ], NegociacaoController.prototype, "valor", void 0);
+            __decorate([
+                index_3.throttle(1000)
+            ], NegociacaoController.prototype, "adiciona", null);
+            __decorate([
+                index_3.throttle(1000)
+            ], NegociacaoController.prototype, "importar", null);
             exports_1("NegociacaoController", NegociacaoController);
         }
     };

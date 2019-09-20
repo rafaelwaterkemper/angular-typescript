@@ -1,6 +1,6 @@
 import { Negociacoes, Negociacao, NegociacaoParcial } from '../models/index';
 import { MensagemView, NegociacoesView } from '../views/index';
-import { domInject } from '../helpers/index';
+import { domInject, throttle } from '../helpers/index';
 
 export class NegociacaoController {
 
@@ -21,9 +21,8 @@ export class NegociacaoController {
         this.negociacaoView.update(this.negociacoes);
     }
 
+    @throttle(1000)
     adiciona(event: Event): void {
-
-        event.preventDefault();
 
         const negociacao = new Negociacao(
             new Date((<string>this.data.val()).replace(/-/g, ',')),
@@ -51,6 +50,7 @@ export class NegociacaoController {
         }
     }
 
+    @throttle(1000)
     importar() {
         fetch("http://localhost:8080/dados")
             .then(res => this.isOk(res))
