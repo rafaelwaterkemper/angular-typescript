@@ -18,6 +18,14 @@ export class Negociacao {
     public ehDiaUtil(): boolean {
         return this.data.getDay() != DiaSemana.Domingo && this.data.getDay() != DiaSemana.Sabado;
     }
+
+    public paraTexto(): void {
+        console.log(
+            `Data: ${this.data} \n
+            Quantidade: ${this.quantidade} \n
+            Valor: ${this._valor}`
+        )
+    }
 }
 
 enum DiaSemana {

@@ -23,6 +23,11 @@ System.register([], function (exports_1, context_1) {
                 ehDiaUtil() {
                     return this.data.getDay() != DiaSemana.Domingo && this.data.getDay() != DiaSemana.Sabado;
                 }
+                paraTexto() {
+                    console.log(`Data: ${this.data} \n
+            Quantidade: ${this.quantidade} \n
+            Valor: ${this._valor}`);
+                }
             };
             exports_1("Negociacao", Negociacao);
             (function (DiaSemana) {

@@ -1,6 +1,6 @@
 import { Negociacoes, Negociacao, NegociacaoParcial } from '../models/index';
 import { MensagemView, NegociacoesView } from '../views/index';
-import { domInject, throttle } from '../helpers/index';
+import { domInject, throttle, imprime } from '../helpers/index';
 import { NegociacaoService } from '../services/index';
 
 export class NegociacaoController {
@@ -36,6 +36,8 @@ export class NegociacaoController {
             this.mensagemView.update('Só podem ser adicionadas negociações em dias úteis.');
             return;
         }
+
+        imprime(negociacao);
 
         this.negociacoes.adiciona(negociacao);
 
