@@ -1,6 +1,7 @@
 import { Negociacoes, Negociacao, NegociacaoParcial } from '../models/index';
 import { MensagemView, NegociacoesView } from '../views/index';
 import { domInject, throttle } from '../helpers/index';
+import { NegociacaoService } from '../services/index';
 
 export class NegociacaoController {
 
@@ -16,6 +17,7 @@ export class NegociacaoController {
     private negociacoes = new Negociacoes();
     private negociacaoView = new NegociacoesView("#negociacoesView", true);
     private mensagemView = new MensagemView("#mensagemView");
+    private negociacaoService = new NegociacaoService();
 
     constructor() {
         this.negociacaoView.update(this.negociacoes);
@@ -42,26 +44,22 @@ export class NegociacaoController {
         this.mensagemView.update('Negociação salva com sucesso');
     }
 
-    private isOk(res: Response) {
-        if (res.ok) {
-            return res;
-        } else {
-            throw new Error(`Retorno da api ${res.statusText}`)
-        }
+    @throttle(1000)
+    importaDados() {
+        this.negociacaoService
+            .importar(res => {
+
+                if (res.ok) {
+                    return res;
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
+            .then(negociacoes => {
+                negociacoes.forEach(negociacao =>
+                    this.negociacoes.adiciona(negociacao));
+                this.negociacaoView.update(this.negociacoes);
+            });
     }
 
-    @throttle(1000)
-    importar() {
-        fetch("http://localhost:8080/dados")
-            .then(res => this.isOk(res))
-            .then(res => res.json())
-            .then((dados: NegociacaoParcial[]) => {
-                dados
-                    .map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
-                    .forEach(negociacao => this.negociacoes.adiciona(negociacao));
-                
-                this.negociacaoView.update(this.negociacoes);
-            })
-            .catch(err => console.log(err))
-    }
 }

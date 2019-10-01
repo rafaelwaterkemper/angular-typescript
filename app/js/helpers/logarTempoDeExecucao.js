@@ -8,7 +8,7 @@ System.register([], function (exports_1, context_1) {
                 console.log(`Conteúdo do descriptor ${JSON.stringify(descriptor)}`);
                 console.log(`Value do descriptor ${JSON.stringify(descriptor.value)}`);
                 console.log(`Parämetro recebido no decorator emSegundos ${emSegundos}`);
-                console.log(`Referência para o objeto decorado ${target}`);
+                console.log(`Referência para o objeto decorado ${JSON.stringify(target)}`);
                 console.log(`Parâmetros do método ${propertyKey}: ${JSON.stringify(args)}`);
                 const start = performance.now();
                 let resultado = metodoOriginal.apply(this, args);
