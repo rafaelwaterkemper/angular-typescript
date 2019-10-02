@@ -38,11 +38,11 @@ export class NegociacaoController {
         }
 
         this.negociacoes.adiciona(negociacao);
-        
+
         this.negociacaoView.update(this.negociacoes);
 
         imprime(negociacao, this.negociacoes);
-        
+
         this.mensagemView.update('Negociação salva com sucesso');
     }
 
@@ -57,9 +57,16 @@ export class NegociacaoController {
                     throw new Error(res.statusText);
                 }
             })
-            .then(negociacoes => {
-                negociacoes.forEach(negociacao =>
-                    this.negociacoes.adiciona(negociacao));
+            .then(toImport => {
+
+                const alreadyImported = this.negociacoes.paraArray();
+
+                toImport
+                    .filter(negociacao =>
+                        !alreadyImported.some(jaImportada =>
+                            negociacao.equals(jaImportada)))
+                    .forEach(negociacao =>
+                        this.negociacoes.adiciona(negociacao));
                 this.negociacaoView.update(this.negociacoes);
             });
     }
