@@ -16,7 +16,10 @@ System.register(["../models/index"], function (exports_1, context_1) {
                         .then(res => res.json())
                         .then((dados) => dados
                         .map(dado => new index_1.Negociacao(new Date(), dado.vezes, dado.montante)))
-                        .catch(err => err);
+                        .catch(err => {
+                        console.log(err);
+                        throw new Error('Falha ao importar as negociações');
+                    });
                 }
             };
             exports_1("NegociacaoService", NegociacaoService);

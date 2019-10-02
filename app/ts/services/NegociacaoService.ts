@@ -1,4 +1,4 @@
-import { NegociacaoParcial, Negociacao} from '../models/index';
+import { NegociacaoParcial, Negociacao } from '../models/index';
 
 export class NegociacaoService {
 
@@ -10,11 +10,14 @@ export class NegociacaoService {
                 dados
                     .map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
             )
-            .catch(err => err)
+            .catch(err => {
+                console.log(err)
+                throw new Error('Falha ao importar as negociações')
+            })
     }
 
 }
 
 export interface HandlerFunction {
-    (res: Response):Response
+    (res: Response): Response
 }
