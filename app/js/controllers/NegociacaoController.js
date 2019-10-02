@@ -38,9 +38,9 @@ System.register(["../models/index", "../views/index", "../helpers/index", "../se
                         this.mensagemView.update('Só podem ser adicionadas negociações em dias úteis.');
                         return;
                     }
-                    index_3.imprime(negociacao);
                     this.negociacoes.adiciona(negociacao);
                     this.negociacaoView.update(this.negociacoes);
+                    index_3.imprime(negociacao, this.negociacoes);
                     this.mensagemView.update('Negociação salva com sucesso');
                 }
                 importaDados() {

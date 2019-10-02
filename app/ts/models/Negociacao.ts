@@ -1,4 +1,6 @@
-export class Negociacao {
+import { Imprimivel } from "./index";
+
+export class Negociacao implements Imprimivel{
     
     //readonly permite apenas a leitura da propriedade, porém não oculta o acesso externo
     constructor(readonly data: Date, private _quantidade: number, private _valor: number){}
@@ -15,11 +17,11 @@ export class Negociacao {
         return this._quantidade * this._valor;
     }
 
-    public ehDiaUtil(): boolean {
+    ehDiaUtil(): boolean {
         return this.data.getDay() != DiaSemana.Domingo && this.data.getDay() != DiaSemana.Sabado;
     }
 
-    public paraTexto(): void {
+    paraTexto(): void {
         console.log(
             `Data: ${this.data} \n
             Quantidade: ${this.quantidade} \n

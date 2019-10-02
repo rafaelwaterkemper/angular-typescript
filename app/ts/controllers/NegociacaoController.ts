@@ -37,12 +37,12 @@ export class NegociacaoController {
             return;
         }
 
-        imprime(negociacao);
-
         this.negociacoes.adiciona(negociacao);
-
+        
         this.negociacaoView.update(this.negociacoes);
 
+        imprime(negociacao, this.negociacoes);
+        
         this.mensagemView.update('Negociação salva com sucesso');
     }
 

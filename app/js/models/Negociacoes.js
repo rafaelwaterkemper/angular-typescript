@@ -15,6 +15,10 @@ System.register([], function (exports_1, context_1) {
                 paraArray() {
                     return [].concat(this._negociacoes);
                 }
+                paraTexto() {
+                    console.log(`para texto \n`);
+                    console.log(`Negociações: ${JSON.stringify(this._negociacoes)}`);
+                }
             };
             exports_1("Negociacoes", Negociacoes);
         }
