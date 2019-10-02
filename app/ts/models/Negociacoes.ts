@@ -1,7 +1,7 @@
 import { Negociacao } from './Negociacao';
-import { Imprimivel } from './Imprimivel';
+import { Entity } from './Entity';
 
-export class Negociacoes implements Imprimivel{
+export class Negociacoes implements Entity<Negociacoes>{
 
     private _negociacoes: Negociacao[] = [];
 
@@ -16,6 +16,10 @@ export class Negociacoes implements Imprimivel{
     paraTexto(): void {
         console.log(`para texto \n`);
         console.log(`Negociações: ${JSON.stringify(this._negociacoes)}`)
+    }
+
+    equals(negociacoes: Negociacoes): boolean {
+        return JSON.stringify(negociacoes) == JSON.stringify(this._negociacoes); 
     }
 
 }

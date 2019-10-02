@@ -1,6 +1,6 @@
-import { Imprimivel } from "./index";
+import { Entity } from "./Entity";
 
-export class Negociacao implements Imprimivel{
+export class Negociacao implements Entity<Negociacao>{
     
     //readonly permite apenas a leitura da propriedade, porém não oculta o acesso externo
     constructor(readonly data: Date, private _quantidade: number, private _valor: number){}
@@ -27,6 +27,12 @@ export class Negociacao implements Imprimivel{
             Quantidade: ${this.quantidade} \n
             Valor: ${this._valor}`
         )
+    }
+
+    equals(negociacao: Negociacao): boolean {
+        return negociacao.data.getDay() == this.data.getDay()
+            && negociacao.data.getMonth() == this.data.getMonth()
+            && negociacao.data.getFullYear() == this.data.getFullYear();
     }
 }
 

@@ -28,6 +28,11 @@ System.register([], function (exports_1, context_1) {
             Quantidade: ${this.quantidade} \n
             Valor: ${this._valor}`);
                 }
+                equals(negociacao) {
+                    return negociacao.data.getDay() == this.data.getDay()
+                        && negociacao.data.getMonth() == this.data.getMonth()
+                        && negociacao.data.getFullYear() == this.data.getFullYear();
+                }
             };
             exports_1("Negociacao", Negociacao);
             (function (DiaSemana) {
